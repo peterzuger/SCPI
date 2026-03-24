@@ -3,7 +3,7 @@ import logging
 from enum import IntFlag
 from typing import Optional
 
-from .device import Device
+from .device import Device, make_device
 
 logger = logging.getLogger(__name__)
 
@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 class SCPI:
     """Implements the commands that *almost* all devices support. This includes:"""
 
-    def __init__(self, device: Device):
-        self.device = device
+    def __init__(self, device: Device, **kwargs):
+        self.device = make_device(device, **kwargs)
 
     def _log(self, level, msg, *args):
         logger.log(level, "%s %s", self.device.name, msg % args)

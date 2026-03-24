@@ -12,9 +12,7 @@ class MP711127(SCPI):
     MAX_POWER = 150.0
 
     def __init__(self, device: SerialDevice | str):
-        if isinstance(device, str):
-            device = SerialDevice(device, self.BAUDRATE)
-        super().__init__(device)
+        super().__init__(device, **{"baudrate": self.BAUDRATE})
 
     # Measurment Commands
     def measure_voltage(self):
