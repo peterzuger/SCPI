@@ -11,14 +11,14 @@ class SerialDevice(Device):
         super().__init__(name or port, end)
 
         self.port = port
-        self.baudrate = baudrate
+        self._baudrate = baudrate
         self._ser = None
 
         self.open()
 
     def open(self):
         if self._ser is None:
-            self._ser = serial.Serial(self.port, self.baudrate)
+            self._ser = serial.Serial(self.port, self._baudrate)
 
     def close(self):
         if self._ser:
