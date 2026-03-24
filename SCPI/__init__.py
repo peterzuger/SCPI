@@ -23,6 +23,12 @@ class SCPI:
     def _info(self, msg, *args):
         self._log(logging.INFO, msg, *args)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.device.close()
+
     # IEEE-488.2 common commands and queries
     def identification(self) -> str:
         self.device.write(b"*IDN?")
