@@ -12,7 +12,7 @@ class Keithley2000(SCPI):
     BAUDRATE = 19200
 
     def __init__(self, device: SerialDevice | str):
-        super().__init__(device, **{"baudrate": self.BAUDRATE})
+        super().__init__(device, baudrate=self.BAUDRATE)
 
         self._function = self.Function.Voltage
 

@@ -11,7 +11,7 @@ class AFG2005(SCPI):
     MAX_FREQUENCY = 5 * 10e5
 
     def __init__(self, device: SerialDevice | str):
-        super().__init__(device, **{"baudrate": self.BAUDRATE})
+        super().__init__(device, baudrate=self.BAUDRATE)
 
     # Apply Commands
     class Function(Enum):

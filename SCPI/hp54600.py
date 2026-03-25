@@ -59,7 +59,7 @@ class HP54600(SCPI):
     }
 
     def __init__(self, device: SerialDevice | str):
-        super().__init__(device, **{"baudrate": self.BAUDRATE})
+        super().__init__(device, baudrate=self.BAUDRATE)
 
     @staticmethod
     def _bool_state(state: bool):
