@@ -7,7 +7,7 @@ from SCPI.device import SerialDevice
 
 
 class AFG2005(SCPI):
-    BAUDRATE = 4_000_000
+    BAUDRATE = 4_000_000  # USB device use max speed
     MAX_FREQUENCY = 5 * 10e5
 
     def __init__(self, device: SerialDevice | str):

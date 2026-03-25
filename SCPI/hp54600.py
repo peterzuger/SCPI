@@ -11,7 +11,7 @@ INF = float("9.9E+37")
 
 
 class HP54600(SCPI):
-    BAUDRATE = 19200
+    BAUDRATE = 9600  # default baudrate
     CHANNELS = 2
     ERRORS = {
         -100: "Command error (unknown command)",
