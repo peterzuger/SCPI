@@ -58,8 +58,8 @@ class HP54600(SCPI):
         -440: "Query UNTERMINATED after indefinite response",
     }
 
-    def __init__(self, device: SerialDevice | str):
-        super().__init__(device, baudrate=self.BAUDRATE)
+    def __init__(self, device: SerialDevice | str, baudrate=BAUDRATE):
+        super().__init__(device, baudrate=baudrate)
 
     @staticmethod
     def _bool_state(state: bool):

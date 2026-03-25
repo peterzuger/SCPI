@@ -11,8 +11,8 @@ class MP711127(SCPI):
     MAX_CURRENT = 5.0
     MAX_POWER = 150.0
 
-    def __init__(self, device: SerialDevice | str):
-        super().__init__(device, baudrate=self.BAUDRATE)
+    def __init__(self, device: SerialDevice | str, baudrate=BAUDRATE):
+        super().__init__(device, baudrate=baudrate)
 
     # Measurment Commands
     def measure_voltage(self):

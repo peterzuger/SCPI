@@ -11,8 +11,8 @@ INF = float("9.9E+37")
 class Keithley2000(SCPI):
     BAUDRATE = 4800  # factory baudrate
 
-    def __init__(self, device: SerialDevice | str):
-        super().__init__(device, baudrate=self.BAUDRATE)
+    def __init__(self, device: SerialDevice | str, baudrate=BAUDRATE):
+        super().__init__(device, baudrate=baudrate)
 
         self._function = self.Function.Voltage
 

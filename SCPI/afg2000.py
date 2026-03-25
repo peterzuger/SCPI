@@ -10,8 +10,8 @@ class AFG2005(SCPI):
     BAUDRATE = 4_000_000  # USB device use max speed
     MAX_FREQUENCY = 5 * 10e5
 
-    def __init__(self, device: SerialDevice | str):
-        super().__init__(device, baudrate=self.BAUDRATE)
+    def __init__(self, device: SerialDevice | str, baudrate=BAUDRATE):
+        super().__init__(device, baudrate=baudrate)
 
     # Apply Commands
     class Function(Enum):
