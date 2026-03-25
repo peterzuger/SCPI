@@ -29,6 +29,11 @@ class SCPI:
     def __exit__(self, exc_type, exc_value, traceback):
         self.device.close()
 
+    # helper methods
+    @staticmethod
+    def _bool_state(state: bool):
+        return "ON" if state else "OFF"
+
     # IEEE-488.2 common commands and queries
     def identification(self) -> str:
         self.device.write(b"*IDN?")

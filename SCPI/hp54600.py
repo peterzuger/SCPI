@@ -61,14 +61,6 @@ class HP54600(SCPI):
     def __init__(self, device: SerialDevice | str, baudrate=BAUDRATE):
         super().__init__(device, baudrate=baudrate)
 
-    @staticmethod
-    def _bool_state(state: bool):
-        return "ON" if state else "OFF"
-
-    @staticmethod
-    def _bool(state: str):
-        return {"ON": True, "OFF": False}[state]
-
     def learn(self):
         self._info("learn")
         self.device.write(b"*LRN?")
@@ -113,7 +105,7 @@ class HP54600(SCPI):
     def dither(self, state: Optional[bool] = None):
         if state is None:
             self.device.write(":DITH?")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":DITH {self._bool_state(state)}")
         self._info("dither %s", state)
@@ -392,7 +384,7 @@ class HP54600(SCPI):
     def measurment_show(self, state: Optional[bool] = None):
         if state is None:
             self.device.write(b":MEAS:SHOW?")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":MEAS:SHOW {self._bool_state(state)}")
         self._info("measurment show: %s", state)
@@ -462,7 +454,7 @@ class HP54600(SCPI):
 
         if state is None:
             self.device.write(f":CHAN{channel}:BWL?")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":CHAN{channel}:BWL {self._bool_state(state)}")
         self._info("channel %d bandwidth limit: %s", channel, state)
@@ -492,7 +484,7 @@ class HP54600(SCPI):
 
         if state is None:
             self.device.write(f":CHAN{channel}:INV?")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":CHAN{channel}:INV {self._bool_state(state)}")
         self._info("channel %d invert: %s", channel, state)
@@ -565,7 +557,7 @@ class HP54600(SCPI):
 
         if state is None:
             self.device.write(f":CHAN{channel}:VERN?")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":CHAN{channel}:VENR {self._bool_state(state)}")
         self._info("channel %d vernier: %s", channel, state)
@@ -628,7 +620,7 @@ class HP54600(SCPI):
     def timebase_vernier(self, state: Optional[bool] = None):
         if state is None:
             self.device.write(b":TIM:VERN?")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":TIM:VERN {self._bool_state(state)}")
         self._info("timebase vernier: %s", state)
@@ -664,7 +656,7 @@ class HP54600(SCPI):
 
         if state is None:
             self.device.write(f":TRAC:MODE? {trace}")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":TRAC:MODE {trace},{self._bool_state(state)}")
         self._info("trace mode %s: %s", trace, state)
@@ -680,7 +672,7 @@ class HP54600(SCPI):
     def display_connect(self, state: Optional[bool] = None):
         if state is None:
             self.device.write(b":DISP:CONN?")
-            state = self._bool(self.device.readline())
+            state = self.device.read_bool()
         else:
             self.device.write(f":DISP:CONN {self._bool_state(state)}")
         self._info("display connect: %s", state)

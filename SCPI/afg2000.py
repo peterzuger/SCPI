@@ -138,7 +138,7 @@ class AFG2005(SCPI):
             self.device.write(b"OUTP?")
             state = self.device.read_bool()
         else:
-            self.device.write(f'OUTP {"ON" if state else "OFF"}')
+            self.device.write(f"OUTP {self._bool_state(state)}")
         self._info("output %s", state)
         return state
 
@@ -226,7 +226,7 @@ class AFG2105(AFG2005):
             self.device.write(f"SOUR:{mod.value}:STAT?")
             state = self.device.read_bool()
         else:
-            self.device.write(f'SOUR:{mod.value}:STAT {"ON" if state else "OFF"}')
+            self.device.write(f"SOUR:{mod.value}:STAT {self._bool_state(state)}")
         self._info("%s modulation %s", mod.name, state)
         return state
 
@@ -370,7 +370,7 @@ class AFG2105(AFG2005):
             self.device.write(b"COUN:STAT?")
             state = bool(int(self.device.readline()))
         else:
-            self.device.write(f'COUN:STAT {"ON" if state else "OFF"}')
+            self.device.write(f"COUN:STAT {self._bool_state(state)}")
         self._info("counter mode %s", state)
         return state
 

@@ -59,7 +59,7 @@ class MP711127(SCPI):
             self.device.write(b"OUTP?")
             state = self.device.read_bool()
         else:
-            self.device.write(f'OUTP {"ON" if state else "OFF"}')
+            self.device.write(f"OUTP {self._bool_state(state)}")
         self._info("output %s", state)
         return state
 
