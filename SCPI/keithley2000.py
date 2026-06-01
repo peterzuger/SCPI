@@ -14,8 +14,6 @@ class Keithley2000(SCPI):
     def __init__(self, device: SerialDevice | str, baudrate=BAUDRATE):
         super().__init__(device, baudrate=baudrate)
 
-        self._function = self.Function.Voltage
-
     # SCPI commands
     class Function(Enum):
         Current = "CURR:DC"
@@ -33,13 +31,13 @@ class Keithley2000(SCPI):
     def configure(self, function: Optional[Function] = None):
         if function is None:
             self.device.write(b":CONF?")
-            self._function = self.Function(self.device.read_string())
+            _function = self.Function(self.device.read_string())
         else:
             self.device.write(f":CONF:{function.value}")
-            self._function = function
+            _function = function
             self.operation_complete()
-        self._info("configured as %s", self._function.name)
-        return self._function
+        self._info("configured as %s", _function.name)
+        return _function
 
     def fetch(self):
         self._info("fetch")
