@@ -2,11 +2,15 @@
 from .util import Device
 from .serial import SerialDevice
 from .socket import SocketDevice
+from .usbtmc import usbtmcDevice
 
 
 def make_device(dev, **kwargs):
     if isinstance(dev, Device):
         return dev
+
+    if "/dev/usbtmc" in dev:
+        return usbtmcDevice(dev)
 
     if "/dev/" in dev:
         return SerialDevice(dev, baudrate=kwargs.get("baudrate"))
@@ -22,4 +26,5 @@ __all__ = [
     "Device",
     "SerialDevice",
     "SocketDevice",
+    "usbtmcDevice",
 ]
