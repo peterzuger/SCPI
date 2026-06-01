@@ -6,7 +6,7 @@ from SCPI.device import SerialDevice
 
 
 class MP711127(SCPI):
-    BAUDRATE = 4_000_000  # USB device use max speed
+    BAUDRATE = 115200  # only baudrate that seems to work (not documented)
     MAX_VOLTAGE = 30.0
     MAX_CURRENT = 5.0
     MAX_POWER = 150.0
