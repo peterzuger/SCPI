@@ -78,6 +78,8 @@ class Device(BaseDevice):
     def read_float(self) -> float:
         data = self._readline()
         self._debug("read float: %s", data)
+        if b"," in data:
+            return [float(val) for val in data.split(b",")]
         return float(data)
 
     def read_bool(self) -> bool:
